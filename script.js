@@ -1,42 +1,30 @@
-// Mobile Menu
-const mobileBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
+// Tailwind script already included via CDN
 
-mobileBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+document.addEventListener('DOMContentLoaded', () => {
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
     
-    const icon = mobileBtn.querySelector('i');
-    if (icon.classList.contains('fa-bars')) {
-        icon.classList.replace('fa-bars', 'fa-xmark');
-    } else {
-        icon.classList.replace('fa-xmark', 'fa-bars');
-    }
-});
-
-// Custom Cursor
-const cursor = document.createElement('div');
-cursor.className = 'cursor-dot';
-document.body.appendChild(cursor);
-
-if (window.innerWidth > 768) {
-    cursor.style.display = 'block';
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
-}
-
-// Form Handler (example)
-function submitForm() {
-    alert("Thank you! We'll get back to you soon.");
-}
-
-// Scroll animations
-window.addEventListener('scroll', () => {
-    document.querySelectorAll('.service-card, .portfolio-item').forEach((el, i) => {
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.8) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('span');
+            
+            const isOpen = !answer.classList.contains('hidden');
+            
+            // Close all others
+            faqItems.forEach(other => {
+                const otherAnswer = other.querySelector('.faq-answer');
+                const otherIcon = other.querySelector('span');
+                otherAnswer.classList.add('hidden');
+                otherIcon.textContent = '+';
+                other.classList.remove('active');
+            });
+            
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.textContent = '−';
+                item.classList.add('active');
+            }
+        });
     });
 });

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-item.active {
+    background-color: #4c1d95;
+}
